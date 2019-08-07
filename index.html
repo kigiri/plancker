@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>kb</title>
+<style type="text/css">
+
+:root {
+  --background-dark: hsl(231, 15%, 14%);
+  --background: hsl(231, 15%, 18%);
+  --background-light: hsl(231, 15%, 22%);
+  --selection-dark: hsl(231, 14%, 26.5%);
+  --selection: hsl(231, 14%, 31%);
+  --selection-light: hsl(231, 14%, 35%);
+  --foreground-dark: hsl(60, 6%, 64%);
+  --foreground: hsl(60, 18%, 80%);
+  --foreground-light: hsl(60, 30%, 96%);
+  --comment: #6272a4;
+  --cyan: #8be9fd;
+  --green: #50fa7b;
+  --orange: #ffb86c;
+  --pink: #ff79c6;
+  --purple: #bd93f9;
+  --red: #ff5555;
+  --yellow: #f1fa8c;
+  --1: 3.9vw;
+  --a: calc(var(--1) / 30);
+  --b: calc(var(--1) / 20);
+  --c: calc(var(--1) / 10);
+  --d: calc(var(--1) / 5);
+  --0: calc(var(--1) / 2);
+  --2: calc(var(--1) * 2);
+  --3: calc(var(--1) * 3);
+  --4: calc(var(--1) * 4);
+  --5: calc(var(--1) * 5);
+  --6: calc(var(--1) * 6);
+  --7: calc(var(--1) * 7);
+  --8: calc(var(--1) * 8);
+  --9: calc(var(--1) * 9);
+  --10: calc(var(--1) * 10);
+  --11: calc(var(--1) * 11);
+  --12: calc(var(--1) * 12);
+}
+
+@media all and (min-width: 1200px) {
+  :root {
+    --1: 37.5px;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  font-family: monospace;
+  font-size: var(--0);
+  background-color: inherit;
+  color: inherit;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground-light);
+}
+
+#container {
+  padding: var(--1);
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.placed {
+  opacity: 0.25;
+}
+
+.special > b {
+  margin-left: calc(var(--0) / 3);
+  font-weight: normal;
+  color: var(--orange)!important;
+}
+.media,
+.action,
+.dir,
+.mod {
+  background-color: var(--background-light)!important;
+  font-size: calc(var(--1) / 1.5);  
+}
+.dir { color: var(--green)!important }
+.mod { color: var(--purple)!important }
+.media { color: var(--cyan)!important }
+.action { color: var(--pink)!important }
+.special { color: var(--yellow)!important }
+
+.row > div.selected {
+  box-shadow: inset 0 0 0 var(--c) var(--pink);
+}
+
+.dragging .row > div.selected {
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.row > div:hover {
+  background-color: var(--background)!important;
+}
+
+.row > div > b {
+  pointer-events: none;
+}
+
+.row > div {
+  width: var(--2);
+  height: var(--2);
+  background-color: var(--selection-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 var(--b) var(--selection-light);
+  user-select: none;
+  -moz-user-select: -moz-none;
+}
+
+#layer-1,
+#layer-2,
+#qwerty {
+  padding: var(--0);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--selection-light);
+  border-radius: var(--0);
+  margin: 0 auto var(--0);
+}
+
+#layer-1,
+#layer-2 {
+  max-width: calc(1200px - var(--7));
+}
+#qwerty {
+  max-width: calc(1200px - var(--7));
+}
+
+</style>
+</head>
+<body>
+  <div id="qwerty">
+    <div class="row">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div id="layer-1">
+    <div class="row">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <div id="layer-2">
+    <div class="row">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</script>
+<script type="module">
+const keys = [
+  { normal: '1', shifted: '!' },
+  { normal: '2', shifted: '@' },
+  { normal: '3', shifted: '#' },
+  { normal: '4', shifted: '$' },
+  { normal: '5', shifted: '%' },
+  { normal: '6', shifted: '^' },
+  { normal: '7', shifted: '&' },
+  { normal: '8', shifted: '*' },
+  { normal: '9', shifted: '(' },
+  { normal: '0', shifted: ')' },
+  { normal: '-', shifted: '_' },
+  { normal: '=', shifted: '+' },
+
+  { normal: 'q', shifted: 'Q' },
+  { normal: 'w', shifted: 'W' },
+  { normal: 'e', shifted: 'E' },
+  { normal: 'r', shifted: 'R' },
+  { normal: 't', shifted: 'T' },
+  { normal: 'y', shifted: 'Y' },
+  { normal: 'u', shifted: 'U' },
+  { normal: 'i', shifted: 'I' },
+  { normal: 'o', shifted: 'O' },
+  { normal: 'p', shifted: 'P' },
+  { normal: '[', shifted: '{' },
+  { normal: ']', shifted: '}' },
+  { normal: 'a', shifted: 'A' },
+  { normal: 's', shifted: 'S' },
+  { normal: 'd', shifted: 'D' },
+  { normal: 'f', shifted: 'F' },
+  { normal: 'g', shifted: 'G' },
+  { normal: 'h', shifted: 'H' },
+  { normal: 'j', shifted: 'J' },
+  { normal: 'k', shifted: 'K' },
+  { normal: 'l', shifted: 'L' },
+  { normal: ';', shifted: ':' },
+  { normal: "'", shifted: '"' },
+  { normal: '\\', shifted: '|' },
+  { normal: 'z', shifted: 'Z' },
+  { normal: 'x', shifted: 'X' },
+  { normal: 'c', shifted: 'C' },
+  { normal: 'v', shifted: 'V' },
+  { normal: 'b', shifted: 'B' },
+  { normal: 'n', shifted: 'N' },
+  { normal: 'm', shifted: 'M' },
+  { normal: ',', shifted: '<' },
+  { normal: '.', shifted: '>' },
+  { normal: '/', shifted: '?' },
+  { normal: '`', shifted: '~' },
+  { type: 'mod', normal: ' ' },
+  { type: 'mod', normal: '⇧' },
+  { type: 'action', normal: '↩' },
+  //{ type: 'action', normal: '⌦' },
+  { type: 'action', normal: '⇥' },
+  { type: 'action', normal: '⎋' },
+  { type: 'action', normal: '↲' },
+
+/*
+ ↺ ` 1 2 3         ↖ ↑ ↗ ⇑
+ ⇥ - 4 5 6 [     ] ← ↓ → ⇓ ↲
+ ⇧ = 7 8 9 0     ; ↩  ' \ ⇧
+*/
+
+  { type: 'dir', normal: '⤒' },
+  { type: 'dir', normal: '↖' },
+  { type: 'dir', normal: '↑' },
+  { type: 'dir', normal: '↗' },
+  { type: 'media', normal: '⏮' },
+  { type: 'media', normal: '⏯' },
+  { type: 'media', normal: '⏭' },
+  { type: 'mod', normal: '⌃' },
+  { type: 'mod', normal: '⌘' },
+  { type: 'mod', normal: '⌥' },
+  { type: 'mod', normal: '▲' },
+  { type: 'mod', normal: '▼' },
+  { type: 'dir', normal: '⤓' },
+  { type: 'dir', normal: '←' },
+  { type: 'dir', normal: '↓' },
+  { type: 'dir', normal: '→' },
+  { type: 'media', normal: '🔈' },
+  { type: 'media', normal: '🔉' },
+  { type: 'media', normal: '🔊' },
+//  { type: 'action', normal: '🔅' },
+//  { type: 'action', normal: '🔆' },
+]
+
+const qwertyElement = document.getElementById('qwerty')
+const keysElements = [...document.querySelectorAll('.row > div')]
+const planckElement = document.getElementById('planck')
+
+let _source, _target
+let _dragMode = "none"
+let _selected = new Set()
+let _shiftKey = false
+let _dragX = 0
+let _dragY = 0
+let _mouseX = 0
+let _mouseY = 0
+let _holding = false
+
+const storeEvenState = e => {
+  _mouseX = e.x
+  _mouseY = e.y
+  _shiftKey = e.shiftKey
+}
+
+const clearSelection = () => {
+  for (const elem of _selected) {
+    elem.style.transform = 'translate(0, 0)'
+    elem.classList.remove('selected')
+  }
+  _selected = new Set()
+}
+
+const byId = (a,b) => a.id.localeCompare(b.id)
+
+requestAnimationFrame(function loop() {
+  requestAnimationFrame(loop)
+
+  const x = _mouseX - _dragX
+  const y = _mouseY - _dragY
+  const dragging = !_shiftKey && _holding && Math.abs(x) + Math.abs(y) > 3
+
+  dragging
+    ? document.body.classList.add('dragging')
+    : document.body.classList.remove('dragging')
+
+  if (_selected.size) {
+    if (_dragMode === 'none') {
+      // Handle selection end
+      console.log('dropped', { _target, _source })
+      const onPlanck = _target && _target.id && _target.id[0] === 'p'
+      if (!onPlanck) {
+        clearKey(_source)
+      } else if (_target !== _source) {
+        const sourceIndex = Number(_source.id.slice(1))
+        const targetIndex = Number(_target.id.slice(1)) + keys.length
+        const diff = targetIndex - sourceIndex
+        const sources = [..._selected].map(elem => {
+          const index = Number(elem.id.slice(1)) + diff
+          const target = keysElements[index]
+          return {
+            index,
+            elem,
+            target,
+            id: elem.isSource ? elem.id : elem.dataset.source,
+            selected: _selected.has(target),
+            innerHTML: elem.innerHTML, // copy
+            className: elem.className, // copy
+          }
+        }).sort((a, b) => a.index - b.index)
+
+        for (const source of sources) {
+          const { elem, target, id } = source
+          if (target.isSource) continue
+          if (!sources.length && target.dataset.source) {
+            elem.innerHTML = target.innerHTML
+            elem.className = target.className
+            elem.dataset.source = target.dataset.source
+          } else {
+            clearKey(elem)
+          }
+          target.innerHTML = source.innerHTML
+          target.className = source.className
+          target.dataset.source = id
+          target.classList.remove('placed')
+        }
+      }
+      clearSelection()
+      _dragX = 0
+      _dragY = 0
+    } else {
+      const transform = `translate(${x}px, ${y}px)`
+      for (const elem of _selected) {
+        dragging && (elem.style.transform = transform)
+      }
+    }
+  }
+
+  const placedKeys = keysElements
+    .map(e => e.dataset.source)
+    .filter(Boolean)
+
+  for (const elem of keysElements) {
+    if (elem.isSource) {
+      elem.classList.toggle('placed', placedKeys.includes(elem.id))
+    }
+    
+    elem.classList.toggle('selected', _selected.has(elem))
+  }
+
+})
+
+window.addEventListener('mouseup', e => {
+  storeEvenState(e)
+  e.shiftKey || (_dragMode = 'none')
+})
+
+window.addEventListener('mousemove', e => {
+  storeEvenState(e)
+  _holding = Boolean(e.which)
+  if (!_holding) return
+  _dragMode === 'delete' && clearKey(e.target)
+  if (!e.shiftKey) return
+  if (!e.target.classList.contains('key')) return
+  _dragMode === 'inverted'
+    ? _selected.delete(e.target)
+    : _selected.add(e.target)
+})
+
+const cap = s => s[0].toUpperCase()+s.slice(1)
+keys.forEach((k, i) => {
+  const elem = k.elem = keysElements[i]
+  const text = cap(k.normal)
+  if (k.shifted && text === k.normal) {
+    elem.innerHTML = `${text}<b>${k.shifted}</b>`
+    elem.classList.add('special', 'key')
+  } else {
+    elem.textContent = text
+    elem.classList.add(k.type || 'letter', 'key')
+  }
+})
+
+const setTarget = e => {
+  storeEvenState(e)
+  _target = e.target
+}
+
+const clearKey = elem => {
+  const sourceId = elem.dataset.source
+  if (!sourceId) return
+  delete elem.dataset.source
+  elem.textContent = ''
+  elem.className = ''
+}
+
+const dragKey = e => {
+  storeEvenState(e)
+  _dragX = e.x
+  _dragY = e.y
+  _source = e.target
+  if (e.which === 3) {
+    _dragMode = 'delete'
+    clearKey(_source)
+  } else if (e.shiftKey) {
+    if (_selected.has(_source)) {
+      _dragMode = 'inverted'
+      _selected.delete(_source)
+    } else {
+      _dragMode = 'normal'
+      _selected.add(_source)
+    }
+  } else if (!_selected.has(_source)) {
+    clearSelection()
+    _dragMode = 'normal'
+    _selected.add(_source)
+  }
+}
+
+keysElements.forEach((elem, i) => {
+  const isSource = i < keys.length
+  elem.isSource = isSource
+  elem.id = isSource ? `q${i}` : `p${i - keys.length}`
+  elem.addEventListener('mouseenter', setTarget)
+  elem.addEventListener('mouseleave', e => {
+    if (_target === e.target) {
+      _target = undefined
+    }
+  })
+
+  elem.addEventListener('mousedown', dragKey)
+  if (!isSource) {
+    elem.addEventListener('contextmenu', e => e.preventDefault())
+  }
+})
+
+</script>
+</body>
+</html>
