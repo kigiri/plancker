@@ -376,13 +376,13 @@ const keys = [
   { normal: '.', shifted: '>' },
   { normal: '/', shifted: '?' },
   { normal: '`', shifted: '~' },
-  { type: 'mod', normal: ' ' },
-  { type: 'mod', normal: '⇧' },
-  { type: 'action', normal: '↩' },
+  { type: 'mod', normal: ' ', description: 'Space' },
+  { type: 'mod', normal: '⇧', description: 'Shift' },
+  { type: 'action', normal: '↩', description: 'Delete' },
   //{ type: 'action', normal: '⌦' },
-  { type: 'action', normal: '⇥' },
-  { type: 'action', normal: '⎋' },
-  { type: 'action', normal: '↲' },
+  { type: 'action', normal: '⇥', description: 'Tabulation' },
+  { type: 'action', normal: '⎋', description: 'Escape' },
+  { type: 'action', normal: '↲', description: 'Enter' },
 
 /*
  ↺ ` 1 2 3         ↖ ↑ ↗ ⇑
@@ -390,22 +390,22 @@ const keys = [
  ⇧ = 7 8 9 0     ; ↩  ' \ ⇧
 */
 
-  { type: 'dir', normal: '⤒' },
-  { type: 'dir', normal: '↖' },
-  { type: 'dir', normal: '↑' },
-  { type: 'dir', normal: '↗' },
-  { type: 'media', normal: '⏮' },
-  { type: 'media', normal: '⏯' },
-  { type: 'media', normal: '⏭' },
-  { type: 'mod', normal: '⌃' },
-  { type: 'mod', normal: '⌘' },
-  { type: 'mod', normal: '⌥' },
-  { type: 'mod', normal: '▲' },
-  { type: 'mod', normal: '▼' },
-  { type: 'dir', normal: '⤓' },
-  { type: 'dir', normal: '←' },
-  { type: 'dir', normal: '↓' },
-  { type: 'dir', normal: '→' },
+  { type: 'dir', normal: '⤒', description: 'Page Up' },
+  { type: 'dir', normal: '↖', description: 'Home' },
+  { type: 'dir', normal: '↑', description: 'Up' },
+  { type: 'dir', normal: '↗', description: 'End' },
+  { type: 'media', normal: '⏮', description: '' },
+  { type: 'media', normal: '⏯', description: '' },
+  { type: 'media', normal: '⏭', description: '' },
+  { type: 'mod', normal: '⌃', description: 'Control' },
+  { type: 'mod', normal: '⌘', description: 'Meta (Command | Win)' },
+  { type: 'mod', normal: '⌥', description: 'Alt (Option)' },
+  { type: 'mod', normal: '▲', description: 'Raise, Layer' },
+  { type: 'mod', normal: '▼', description: 'Lower, Layer 1 + Shift' },
+  { type: 'dir', normal: '⤓', description: 'Page Down' },
+  { type: 'dir', normal: '←', description: 'Left' },
+  { type: 'dir', normal: '↓', description: 'Down' },
+  { type: 'dir', normal: '→', description: 'Right' },
   { type: 'media', normal: '🔈' },
   { type: 'media', normal: '🔉' },
   { type: 'media', normal: '🔊' },
@@ -548,6 +548,7 @@ keys.forEach((k, i) => {
     elem.textContent = text
     elem.classList.add(k.type || 'letter', 'key')
   }
+  k.description && (elem.title = k.description)
 })
 
 const setTarget = e => {
